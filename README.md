@@ -1,38 +1,43 @@
-# Slint Rust Template
+# Slint Chatbot Demo
 
-A template for a Rust application that's using [Slint](https://slint-ui.com) for the user interface.
+This is a demo of Rust + Slint + Candle + Yolov8, it looks like this:
 
-## About
+![](./assets/objects.png)
+![](./assets/poses.png)
 
-This template helps you get started developing a Rust application with Slint as toolkit
-for the user interface. It demonstrates the integration between the `.slint` UI markup and
-Rust code, how to trigger react to callbacks, get and set properties and use basic widgets.
+## Do it by yourself
 
-## Usage
+Make sure you have downloaded `yolov8m.safetensors` and `yolov8m-pose.safetensors` by:
 
-1. Install Rust by following the [Rust Getting Started Guide](https://www.rust-lang.org/learn/get-started).
-   Once this is done, you should have the ```rustc``` compiler and the ```cargo``` build system installed in your path.
-2. Install [`cargo-generate`](https://github.com/cargo-generate/cargo-generate)
-    ```
-    cargo install cargo-generate
-    ```
-3. Set up a sample project with this template
-    ```
-    cargo generate --git https://github.com/slint-ui/slint-rust-template --name my-project
-    cd my-project
-    ```
-3. Build with cargo
-    ```
-    cargo build
-    ```
-4. Run the application binary
-     ```
-     cargo run
-     ```
+```
+HF_HUB_ENABLE_HF_TRANSFER=1 HF_ENDPOINT=https://hf-mirror.com huggingface-cli download lmz/candle-yolo-v8 yolov8m.safetensors
+HF_HUB_ENABLE_HF_TRANSFER=1 HF_ENDPOINT=https://hf-mirror.com huggingface-cli download lmz/candle-yolo-v8 yolov8m-pose.safetensors
+```
+The downloads locate at `~/.cache/huggingface/hub/`.
 
-We recommend using an IDE for development, along with our [LSP-based IDE integration for `.slint` files](https://github.com/slint-ui/slint/blob/master/tools/lsp/README.md). You can also load this project directly in [Visual Studio Code](https://code.visualstudio.com) and install our [Slint extension](https://marketplace.visualstudio.com/items?itemName=Slint.slint).
+Copy them to the root of the current project directory, like follows:
 
-## Next Steps
+```
+$ ls -lh
+total 101M
+-rwxr-xr-x 1 mike mike 150K Dec  9 14:58 Cargo.lock
+-rwxr-xr-x 1 mike mike  615 Dec  9 14:58 Cargo.toml
+-rwxr-xr-x 1 mike mike 1.1K Dec  9 14:58 LICENSE
+-rwxr-xr-x 1 mike mike  747 Dec  9 18:29 README.md
+drwxr-xr-x 2 mike mike 4.0K Dec  9 18:27 assets
+-rwxr-xr-x 1 mike mike   71 Dec  9 14:58 build.rs
+-rwxr-xr-x 1 mike mike 168K Dec  9 14:58 football.jpg
+drwxr-xr-x 3 mike mike 4.0K Dec  9 14:58 src
+drwxr-xr-x 4 mike mike 4.0K Dec  9 15:03 target
+drwxr-xr-x 2 mike mike 4.0K Dec  9 14:58 ui
+-rw-r--r-- 1 mike mike  51M Dec  9 17:45 yolov8m-pose.safetensors
+-rw-r--r-- 1 mike mike  50M Dec  9 17:45 yolov8m.safetensors
+```
 
-We hope that this template helps you get started and you enjoy exploring making user interfaces with Slint. To learn more
-about the Slint APIs and the `.slint` markup language check out our [online documentation](https://slint-ui.com/docs/rust/slint/).
+and then 
+
+```
+cargo run --release
+```
+
+You will look at a GUI app popped up, good luck!
